@@ -43,10 +43,16 @@ public:
 };
 
 class Solver{
+	int max;
 	vector<pair<vector<bool>, double>> gen;
 	double mutation_rate, crossover_rate;
 	Parser * parser;
 	double fit(const vector<bool> & kit) const;
+	struct{
+		bool operator()(pair<vector<bool>, double> a, pair<vector<bool>, double> b) const{
+			return a.second > b.second;
+		}
+	}cmp;
 public:
 	Solver(){}
 	Solver(Parser * p, double m, double c){
@@ -61,6 +67,7 @@ public:
 			  pair<vector<bool>, double> & ans) const;
 	vector<pair<vector<bool>, double>> get_gen(){return gen;}
 	void regen();
+	double get_max(){return max;}
 	void print_gen();
 	Solver * operator= (Solver * s){
 		//allocate memory

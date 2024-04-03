@@ -5,10 +5,12 @@ int main(void){
 	Parser parser(input_file);
 	parser.read();
 	
-	Solver solver(&parser, 0.5, 0.001);
-	solver.init_gen(10);
-	for(int i = 0; i < 100; i++)
+	Solver solver(&parser, 0.001, 0.75);
+	solver.init_gen(50);
+	for(int i = 0; i < 10000; i++){
+		cout << solver.get_max() << endl;
 		solver.regen();
+	}
 	solver.print_gen();
 	return 0;
 }
